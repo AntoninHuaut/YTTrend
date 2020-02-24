@@ -1,0 +1,17 @@
+{
+  "name": "yttrend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/apps.js"
+  },
+  "author": "Maner",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.24.0",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.0",
+    "node-schedule": "^1.3.2"
+  }
+}

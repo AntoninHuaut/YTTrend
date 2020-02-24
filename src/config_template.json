@@ -1,0 +1,14 @@
+{
+    "youtube": {
+        "apiKey": "",
+        "regionCode": "FR",
+        "maxResults": 50
+    },
+    "sql": {
+        "host": "",
+        "port": 3306,
+        "database": "",
+        "user": "",
+        "password": ""
+    }
+}
