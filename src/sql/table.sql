@@ -23,6 +23,10 @@ CREATE TABLE VIDEO(
   videoDate DATETIME NOT NULL,
   categoryId VARCHAR(16) NOT NULL,
   thumbnail VARCHAR(128) NOT NULL,
+  viewCount INT NOT NULL,
+  likeCount INT NOT NULL,
+  dislikeCount INT NOT NULL,
+  commentCount INT NOT NULL,
   PRIMARY KEY(videoId),
   FOREIGN KEY(channelId) REFERENCES CHANNEL(channelId)
 );

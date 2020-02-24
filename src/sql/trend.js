@@ -84,9 +84,13 @@ function insertTag(con, tag) {
 function insertVideo(video) {
     return new Promise((resolve, reject) => {
         let con = sql.getConnection();
-        con.query(`INSERT INTO VIDEO (videoId, channelId, videoTitle, videoDate, categoryId, thumbnail) VALUES (?, ?, ?, ?, ?, ?) 
-                   ON DUPLICATE KEY UPDATE videoTitle = VALUES(videoTitle), categoryId = VALUES(categoryId), thumbnail = VALUES(thumbnail)`,
-            [video.videoId, video.channelId, video.videoTitle, video.videoDate, video.categoryId, video.thumbnail], (err, result) => {
+        con.query(`INSERT INTO VIDEO (videoId, channelId, videoTitle, videoDate, categoryId, thumbnail, viewCount, likeCount, dislikeCount, commentCount) 
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+                   ON DUPLICATE KEY UPDATE 
+                   videoTitle = VALUES(videoTitle), categoryId = VALUES(categoryId), thumbnail = VALUES(thumbnail), 
+                   viewCount = VALUES(viewCount), likeCount = VALUES(likeCount), dislikeCount = VALUES(dislikeCount), commentCount = VALUES(commentCount)`,
+            [video.videoId, video.channelId, video.videoTitle, video.videoDate, video.categoryId, video.thumbnail, video.viewCount, video.likeCount, video.dislikeCount, video.commentCount],
+            (err, result) => {
                 if (err) return reject(err);
                 resolve(result);
             });

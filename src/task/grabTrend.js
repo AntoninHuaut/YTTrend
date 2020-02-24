@@ -6,7 +6,7 @@ const Video = require('../model/Video');
 const sql = require('../sql');
 const config = require('../config.json');
 
-const URL_TEMPLATE = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode={REGION_CODE}&maxResults={MAX_RESULTS}&key={API_KEY}';
+const URL_TEMPLATE = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&regionCode={REGION_CODE}&maxResults={MAX_RESULTS}&key={API_KEY}';
 
 exports.requestYTTrend = () => {
     console.log(new Date().toISOString(), "Start Refresh...");

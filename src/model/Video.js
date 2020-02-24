@@ -10,6 +10,10 @@ module.exports = class Video {
         this.position = position + 1;
         this.categoryId = item.snippet.categoryId;
         this.thumbnail = item.snippet.thumbnails.high.url;
+        this.viewCount = item.statistics.viewCount;
+        this.likeCount = item.statistics.likeCount;
+        this.dislikeCount = item.statistics.dislikeCount;
+        this.commentCount = item.statistics.commentCount;
         this.tags = item.snippet.tags;
     }
 }
