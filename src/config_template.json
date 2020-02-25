@@ -1,4 +1,5 @@
 {
+    "port": 3007,
     "youtube": {
         "apiKey": "",
         "regionCode": "FR",

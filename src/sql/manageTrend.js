@@ -101,8 +101,9 @@ function insertVideo(video) {
 function insertVideoTrend(trend, video) {
     return new Promise((resolve, reject) => {
         let con = sql.getConnection();
-        con.query("INSERT INTO VIDEOTREND (videoId, trendDate, position) VALUES (?, ?, ?)", [video.videoId, trend.date, video.position], (err, result) => {
-            if (err && err.code !== 'ER_DUP_ENTRY') return reject(err);
+        con.query(`INSERT INTO VIDEOTREND (videoId, trendDate, position) VALUES (?, ?, ?) 
+                   ON DUPLICATE KEY UPDATE videoId = VALUES(videoId)`, [video.videoId, trend.date, video.position], (err, result) => {
+            if (err) return reject(err);
             resolve(result);
         });
         con.end();

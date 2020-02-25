@@ -1,5 +1,5 @@
 CREATE TABLE TREND(
-    trendDate DATE,
+    trendDate DATETIME,
     PRIMARY KEY(trendDate)
 );
 
@@ -11,9 +11,9 @@ CREATE TABLE CHANNEL(
 
 CREATE TABLE TAG(
     tagId INT AUTO_INCREMENT,
-    tagName VARCHAR(64) NOT NULL,
+    tagName VARCHAR(128) NOT NULL,
     PRIMARY KEY(tagId),
-    UNIQUE(tagName)
+    CONSTRAINT U_TAG_TAGNAME UNIQUE(tagName)
 );
 
 CREATE TABLE VIDEO(
@@ -33,11 +33,12 @@ CREATE TABLE VIDEO(
 
 CREATE TABLE VIDEOTREND(
     videoId VARCHAR(16),
-    trendDate DATE,
+    trendDate DATETIME,
     position INT,
     PRIMARY KEY(videoId, trendDate),
     FOREIGN KEY(videoId) REFERENCES VIDEO(videoId),
-    FOREIGN KEY(trendDate) REFERENCES TREND(trendDate)
+    FOREIGN KEY(trendDate) REFERENCES TREND(trendDate),
+    CONSTRAINT U_VIDEOTREND_POSITIONDATE UNIQUE(trendDate, position)
 );
 
 CREATE TABLE VIDEOTAG(

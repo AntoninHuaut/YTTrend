@@ -28,7 +28,7 @@ exports.requestYTTrend = () => {
             const videos = res.items.map((item, position) => new Video(item, position));
             const trend = new Trend(new Date(), videos);
             
-            sql.trend.insertNewTrend(trend).then(() => console.log(new Date().toISOString(), "Refresh OK"));
+            sql.manageTrend.insertNewTrend(trend).then(() => console.log(new Date().toISOString(), "Refresh OK"));
         })
         .catch(err => console.error(new Date().toISOString(), "Err: requestYTTrend()", err));
 }

@@ -48,4 +48,5 @@ exports.getConnection = () => {
     return con;
 };
 
-exports.trend = require('./trend');
+exports.manageTrend = require('./manageTrend');
+exports.api = require('./api');
