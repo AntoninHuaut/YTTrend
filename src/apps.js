@@ -11,7 +11,7 @@ global.__basedir = __dirname;
 sql.initTable().then(start);
 
 function start() {
-    schedule.scheduleJob('0 0 2/6 * * *', grabTrend.requestYTTrend);
+    schedule.scheduleJob('0 2-23/6 * * *', grabTrend.requestYTTrend);
     initExpress();
 }
 
