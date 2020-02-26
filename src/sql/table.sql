@@ -4,7 +4,7 @@ CREATE TABLE TREND(
 );
 
 CREATE TABLE CHANNEL(
-    channelId VARCHAR(16),
+    channelId VARCHAR(32),
     channelTitle VARCHAR(128) NOT NULL,
     PRIMARY KEY(channelId)
 );
@@ -17,8 +17,8 @@ CREATE TABLE TAG(
 );
 
 CREATE TABLE VIDEO(
-  videoId VARCHAR(16),
-  channelId VARCHAR(16) NOT NULL,
+  videoId VARCHAR(32),
+  channelId VARCHAR(32) NOT NULL,
   videoTitle VARCHAR(128) NOT NULL,
   videoDate DATETIME NOT NULL,
   categoryId VARCHAR(16) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE VIDEO(
 );
 
 CREATE TABLE VIDEOTREND(
-    videoId VARCHAR(16),
+    videoId VARCHAR(32),
     trendDate DATETIME,
     position INT,
     PRIMARY KEY(videoId, trendDate),
@@ -42,7 +42,7 @@ CREATE TABLE VIDEOTREND(
 );
 
 CREATE TABLE VIDEOTAG(
-    videoId VARCHAR(16),
+    videoId VARCHAR(32),
     tagId INT,
     PRIMARY KEY(videoId, tagId),
     FOREIGN KEY(videoId) REFERENCES VIDEO(videoId),
