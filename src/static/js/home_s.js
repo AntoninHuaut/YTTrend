@@ -4,6 +4,7 @@ var cardTemplate;
 const VIDEO_URL = 'https://www.youtube.com/watch?v={videoId}';
 const CHANNEL_URL = 'https://www.youtube.com/channel/{channelId}';
 const IMG_URL = 'https://i.ytimg.com/vi/{videoId}/mqdefault.jpg';
+const EMBED_URL = 'http://www.youtube.com/embed/{videoId}?autoplay=1&modestbranding=1&playsinline=1';
 
 function update(value) {
     if (!value) return;
@@ -17,6 +18,7 @@ function update(value) {
     fetch('/api/' + value)
         .then(res => res.json())
         .then(res => {
+            if (!Array.isArray(res)) return;
             while (trends.firstChild) trends.removeChild(trends.firstChild);
 
             res.forEach(item => {
@@ -27,8 +29,13 @@ function update(value) {
                 card.querySelector('.channelTitle').textContent = item.channelTitle;
                 card.querySelector('.videoTitle').textContent = item.videoTitle;
 
-                card.querySelectorAll('.videoLink').forEach(el => el.href = convert(VIDEO_URL, item));
+                card.querySelector('.videoLink').href = convert(VIDEO_URL, item);
                 card.querySelector('.channelLink').href = convert(CHANNEL_URL, item);
+
+                card.querySelector('.videoPlayer').onclick = () => {
+                    convertIMGToPlayer(card, item);
+                    return false;
+                };
 
                 card.querySelector('.videoDate').textContent = moment(item.videoDate).format("DD/MM/YYYY");
 
@@ -41,6 +48,21 @@ function update(value) {
                 trends.appendChild(card);
             });
         });
+}
+
+function convertIMGToPlayer(card, item) {
+    const videoPlayer = card.querySelector('.videoPlayer');
+    videoPlayer.onclick = null;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = convert(EMBED_URL, item);
+    iframe.style.width = "320px";
+    iframe.style.height = "180px";
+    iframe.frameBorder = "0";
+    iframe.allowFullscreen = "1";
+
+    videoPlayer.removeChild(videoPlayer.querySelector('.thumbnail'));
+    videoPlayer.appendChild(iframe);
 }
 
 function formatNumber(x) {
