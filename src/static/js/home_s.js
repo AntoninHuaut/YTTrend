@@ -4,7 +4,7 @@ var cardTemplate;
 const VIDEO_URL = 'https://www.youtube.com/watch?v={videoId}';
 const CHANNEL_URL = 'https://www.youtube.com/channel/{channelId}';
 const IMG_URL = 'https://i.ytimg.com/vi/{videoId}/mqdefault.jpg';
-const EMBED_URL = 'http://www.youtube.com/embed/{videoId}?autoplay=1&modestbranding=1&playsinline=1';
+const EMBED_URL = 'https://www.youtube.com/embed/{videoId}?autoplay=1&modestbranding=1&playsinline=1';
 
 function update(value) {
     if (!value) return;
