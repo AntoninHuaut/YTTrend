@@ -1,9 +1,13 @@
+<link rel="stylesheet" href="/css/home.css" />
+
 <div class="container-fluid container-base w-75">
-    <div class="form-group row">
-        <label for="selectTrendDate" class="col-sm-4 col-form-label">
-            Display the trends corresponding to the date :
-        </label>
-        <div class="col-sm-8">
+    <div class="d-flex flex-wrap justify-content-center mb-3 align-items-center">
+        <div>
+            <label for="selectTrendDate" class="mr-3">
+                Display the trends corresponding to the date :
+            </label>
+        </div>
+        <div>
             <select id="selectTrendDate" class="selectpicker" data-live-search="true"
                 data-live-search-placeholder="Filter (example: 02/2020)" onchange="update(this.value);">
                 {{#each finalTrendList}}
@@ -24,13 +28,38 @@
 </div>
 
 <!-- Template -->
-<div id="cardTemplate" class="card" style="display: none; width: 286px;">
-    <img class="thumbnail" src="" style="width: 286px; height: 180px;" alt="Thumbnail">
+<div id="cardTemplate" class="card d-flex" style="display: none; width: 322px;">
+    <a class="videoLink" href=""><img class="thumbnail" src="" style="width: 320px; height: 180px;" alt="Thumbnail"></a>
+    <div>
+        <span class="mdi mdi-medal"><span class="position"></span></span>
+    </div>
     <div class="card-body">
-        <a class="videoLink" href=""><h6 class="videoTitle card-title"></h6></a>
-        <a class="channelLink" href=""><h6 class="channelTitle card-subtitle mb-2 text-muted"></h6></a>
-        <p class="card-text">
-        </p>
+        <a class="videoLink" href="">
+            <h6 class="videoTitle max-lines-2"></h6>
+        </a>
+    </div>
+    <div class="card-footer remove-footer infos d-flex justify-content-between">
+        <div class="infos-channelTitle">
+            <a class="channelLink" href="">
+                <span class="channelTitle text-truncate text-muted"></span>
+            </a>
+        </div>
+        <div class="infos-videoDate text-right">
+            <span class="videoDate text-muted"></span>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="card-stats">
+            <div>
+                <span class="mdi mdi-thumb-up"></span><span class="likeCount"></span>
+            </div>
+            <div>
+                <span class="mdi mdi-eye"></span><span class="viewCount"></span>
+            </div>
+            <div>
+                <span class="mdi mdi-thumb-down"></span><span class="dislikeCount"></span>
+            </div>
+        </div>
     </div>
 </div>
 
