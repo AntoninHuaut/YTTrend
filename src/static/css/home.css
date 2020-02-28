@@ -41,10 +41,8 @@
 }
 
 .card-stats {
-    display: flex;
-    justify-content: space-between;
-    padding: 0rem 0.50rem;
-    font-size: 14px;
+    padding: 0rem 0.125rem;
+    font-size: 13px;
 }
 
 .mdi-medal {

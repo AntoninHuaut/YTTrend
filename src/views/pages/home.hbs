@@ -3,11 +3,26 @@
 <div class="container-fluid container-base w-75">
     <div class="d-flex flex-wrap justify-content-center mb-3 align-items-center">
         <div>
-            <label for="selectTrendDate" class="mr-3">
+            <input type="checkbox" id="details" name="details" onchange="updateDetails(this.checked);" data-toggle="toggle" data-size="small" />
+            <label class="ml-1 mr-5" for="details">Detailed dates</label>
+        </div>
+
+        <div>
+            <label for="selectTrendDate" class="ml-5 mr-3">
                 Display the trends corresponding to the date :
             </label>
         </div>
-        <div>
+
+        <div id="simpleDate">
+            <select id="selectTrendDateOnly" class="selectpicker" data-live-search="true"
+                data-live-search-placeholder="Filter (example: 02/2020)" onchange="update(this.value);">
+                {{#each latestTrendList}}
+                <option value="{{date}}" title="{{dateFormated}}">{{dateFormated}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div id="detailsDate" style="display: none;">
             <select id="selectTrendDate" class="selectpicker" data-live-search="true"
                 data-live-search-placeholder="Filter (example: 02/2020)" onchange="update(this.value);">
                 {{#each finalTrendList}}
@@ -29,7 +44,8 @@
 
 <!-- Template -->
 <div id="cardTemplate" class="card d-flex" style="display: none; width: 322px;">
-    <a class="videoPlayer" href="#"><img class="thumbnail" src="" style="width: 320px; height: 180px;" alt="Thumbnail"></a>
+    <a class="videoPlayer" href="#"><img class="thumbnail" src="" style="width: 320px; height: 180px;"
+            alt="Thumbnail"></a>
     <div>
         <span class="mdi mdi-medal"><span class="position"></span></span>
     </div>
@@ -49,12 +65,15 @@
         </div>
     </div>
     <div class="card-footer">
-        <div class="card-stats">
+        <div class="card-stats d-flex justify-content-around">
             <div>
                 <span class="mdi mdi-thumb-up"></span><span class="likeCount"></span>
             </div>
             <div>
                 <span class="mdi mdi-eye"></span><span class="viewCount"></span>
+            </div>
+            <div>
+                <span class="mdi mdi-comment-multiple-outline"></span><span class="commentCount"></span>
             </div>
             <div>
                 <span class="mdi mdi-thumb-down"></span><span class="dislikeCount"></span>

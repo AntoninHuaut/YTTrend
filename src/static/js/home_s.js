@@ -41,6 +41,7 @@ function update(value) {
 
                 card.querySelector('.position').textContent = formatNumber(item.position);
                 card.querySelector('.viewCount').textContent = ' ' + formatNumber(item.viewCount);
+                card.querySelector('.commentCount').textContent = ' ' + formatNumber(item.commentCount);
                 card.querySelector('.likeCount').textContent = ' ' + formatNumber(item.likeCount);
                 card.querySelector('.dislikeCount').textContent = ' ' + formatNumber(item.dislikeCount);
 
@@ -48,6 +49,31 @@ function update(value) {
                 trends.appendChild(card);
             });
         });
+}
+
+function updateDetails(value) {
+    const simpleDate = document.getElementById('simpleDate');
+    const detailsDate = document.getElementById('detailsDate');
+
+    simpleDate.style.display = !value ? 'block' : 'none';
+    detailsDate.style.display = value ? 'block' : 'none';
+
+    let dateValue;
+
+    if (value) {
+        dateValue = document.getElementById('selectTrendDateOnly').value;
+        $('#selectTrendDate').selectpicker('val', dateValue);
+    } else {
+        const tmpDate = moment(new Date(document.getElementById('selectTrendDate').value)).format("DD/MM/YYYY");
+
+        for (let child of document.getElementById('selectTrendDateOnly').children)
+            if (child.title === tmpDate)
+                dateValue = child.value;
+
+        $('#selectTrendDateOnly').selectpicker('val', dateValue);
+    }
+
+    update(dateValue);
 }
 
 function convertIMGToPlayer(card, item) {

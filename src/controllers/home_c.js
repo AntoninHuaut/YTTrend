@@ -13,19 +13,23 @@ exports.home = async function (req, res) {
     });
 
     const finalTrendList = [];
+    const latestTrendList = [];
 
     trendList.forEach(trend => {
         const date = moment(trend.date).format("DD/MM/YYYY");
-        const res = finalTrendList.filter(finalTrend => finalTrend.dateFormated === date);
+        const resFinal = finalTrendList.filter(finalTrend => finalTrend.dateFormated === date);
 
-        if (res.length) res[0].trendList.push(trend);
+        if (resFinal.length) resFinal[0].trendList.push(trend);
         else finalTrendList.push({
             dateFormated: date,
             trendList: [trend]
         });
     });
 
+    finalTrendList.forEach(trend => latestTrendList.push(trend.trendList[0]));
+
     res.render('home', {
-        finalTrendList: finalTrendList
+        finalTrendList: finalTrendList,
+        latestTrendList: latestTrendList
     });
 }
