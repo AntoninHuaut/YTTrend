@@ -6,6 +6,7 @@ const urlencodedParser = bodyParser.urlencoded({
 });
 
 router.get("/select", controller.selectDateInterval);
+router.get("/stats", controller.redirectStatsPost);
 
 router.post("/stats", urlencodedParser, controller.showStats);
 
