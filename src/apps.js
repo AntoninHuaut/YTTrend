@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const schedule = require('node-schedule');
 const path = require('path');
 
-const grabTrend = require('./task/grabTrend');
+const grabTrend = require('./utils/grabTrend');
 const sql = require('./sql');
 const config = require('./config');
 global.__basedir = __dirname;
@@ -16,6 +16,8 @@ function start() {
 }
 
 function initExpress() {
+    require('./utils/hbsHelper')();
+
     web.use(require('helmet')());
     web.use(bodyParser.urlencoded({
         extended: true

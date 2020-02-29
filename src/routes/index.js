@@ -6,5 +6,6 @@ router.use(express.static(path.join(__basedir + '/static')));
 
 router.use("/", require("./home_r"));
 router.use("/api", require("./api_r"));
+router.use("/statistics", require("./statistics_r"));
 
 module.exports = router;

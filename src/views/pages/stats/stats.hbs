@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="/css/stats.css" />
+
+<div class="container-fluid container-base w-75">
+    <div id="portraitInfo" class="text-center">
+        <h6>Only landscape display is available :(</h6>
+    </div>
+
+    <div id="onlyLandscape" class="d-flex flex-wrap justify-content-center mb-3 align-items-center">
+        <div>
+            <h5>{{dateStart}} <span class="ml-2 mr-2 mdi mdi-calendar-arrow-right"></span> {{dateEnd}}</h5>
+        </div>
+
+        <div class="break"></div>
+
+        <div class="mt-3 mb-3">
+            <button data-name="Tag-totalViews" data-id="0" class="btn btn-primary toggleItem"
+                onclick="toggle(this.getAttributeNode('data-id').value);">Tag Views</button>
+            <button data-name="Tag-occurences" data-id="1" class="btn btn-primary toggleItem"
+                onclick="toggle(this.getAttributeNode('data-id').value);">Tag Occurences</button>
+        </div>
+
+        {{#each tagSort}}
+        <table id="toggleTag-{{this}}" class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tag</th>
+                    <th scope="col">Views</th>
+                    <th scope="col">Occurences</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#eachCustom ../tagStats this}}
+                <tr>
+                    <th>{{math index "+" 1}}</th>
+                    <td>{{tagName}}</td>
+                    <td>{{formatNumber totalViews}}</td>
+                    <td>{{formatNumber occurences}}</td>
+                </tr>
+                {{/eachCustom}}
+        </table>
+        {{/each}}
+    </div>
+</div>
+
+<script src="/js/stats/stats.js"></script>

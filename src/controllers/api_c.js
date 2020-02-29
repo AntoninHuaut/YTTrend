@@ -11,18 +11,18 @@ exports.listVideoTrend = async function (req, res) {
         error: "No trend recorded"
     });
 
-    let trendDate = req.params.trendDate;
-    if (trendDate === 'recent') trendDate = resultTrend[0];
+    const recent = resultTrend[0];
+    const old = resultTrend[resultTrend.length - 1];
 
-    trendDate = new Date(trendDate);
+    let startDate = req.params.startDate;
+    let endDate = req.params.endDate;
+    if (startDate === 'recent') startDate = recent;
+    else if (startDate === 'old') startDate = old;
 
-    const filtered = resultTrend.filter(date => date.getTime() === trendDate.getTime());
-    if (isNaN(trendDate.getTime()) || !filtered.length) return res.send({
-        error: "Invalid parameter"
-    });
+    if (!endDate) endDate = startDate;
+    if (endDate === 'recent') endDate = recent;
+    else if (endDate === 'old') endDate = old;
 
-    trendDate = filtered[0];
-    
-    const resultVideoTrend = await sql.api.getAllVideoTrend_ByDate(trendDate);
+    const resultVideoTrend = await sql.api.getAllVideoTrend_BetweenDate(new Date(startDate), new Date(endDate));
     res.send(resultVideoTrend);
 }

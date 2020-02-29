@@ -1,5 +1,16 @@
-<script src="/lib/popper.min.js"></script>
 <script src="/lib/jquery-3.4.1.min.js"></script>
+<script src="/lib/detectmobilebrowser.js"></script>
+
+<script>
+    refresh();
+    function refresh() {
+        const container = Array.from(document.querySelectorAll(".container")).concat(Array.from(document.querySelectorAll('.container-fluid')));
+        if (jQuery.browser.mobile && container)
+            container.forEach(el => el.classList.remove("w-25", "w-50", "w-75"));
+    }
+</script>
+
+<script src="/lib/popper.min.js"></script>
 <script src="/lib/bootstrap/bootstrap.min.js"></script>
 <script src="/lib/bootstrap-select/bootstrap-select.js"></script>
 <script src="/lib/bootstrap-toggle/bootstrap-toggle.min.js"></script>
