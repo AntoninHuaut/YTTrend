@@ -1,39 +1,16 @@
-const sql = require('../sql');
+const TagStats = require('../model/TagStats');
+const cache = {};
 
 exports.getTagsStats = (startDate, endDate) => {
     return new Promise(async (resolve) => {
-        const videosTrend = await sql.api.getAllVideoTrend_BetweenDate(startDate, endDate);
-        const videoIdCheck = [];
-        let tagsStats = [];
+        if (!cache[startDate] || !cache[startDate][endDate]) {
+            if (!cache[startDate]) cache[startDate] = {};
 
-        videosTrend.forEach(videoTrend => {
-            const videoId = videoTrend.videoId;
-            const trendDate = videoTrend.trendDate;
+            cache[startDate][endDate] = new TagStats(startDate, endDate);
+            const gett = await cache[startDate][endDate].refresh();
+            return resolve(gett);
+        }
 
-            if (videoIdCheck.filter(videoCheck => videoCheck.videoId === videoId && videoCheck.trendDate !== trendDate).length) return;
-            videoIdCheck.push({
-                videoId: videoId,
-                trendDate: trendDate
-            });
-
-            videoTrend.tags.forEach(tagInfo => {
-                if (!tagInfo.tagId) return;
-                
-                const tagObject = tagsStats.filter(tagStats => tagStats.tagId === tagInfo.tagId);
-
-                if (tagObject.length) {
-                    tagObject[0].totalViews += videoTrend.viewCount;
-                    tagObject[0].occurences++;
-                } else
-                    tagsStats.push({
-                        tagId: tagInfo.tagId,
-                        tagName: tagInfo.tagName,
-                        totalViews: videoTrend.viewCount,
-                        occurences: 1
-                    });
-            });
-        });
-
-        resolve(tagsStats);
+        resolve(cache[startDate][endDate].getStats());
     });
 }
