@@ -26,7 +26,7 @@ CREATE TABLE VIDEO(
   viewCount INT NOT NULL,
   likeCount INT NOT NULL,
   dislikeCount INT NOT NULL,
-  commentCount INT NOT NULL,
+  commentCount INT DEFAULT 0,
   PRIMARY KEY(videoId),
   FOREIGN KEY(channelId) REFERENCES CHANNEL(channelId)
 );
